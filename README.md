@@ -1,55 +1,19 @@
 # GraphQL POC in PHP
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT) 
-[![Build Status](https://travis-ci.org/Samffy/graphql-poc.svg?branch=master)](https://travis-ci.org/Samffy/graphql-poc) 
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Samffy/graphql-poc/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Samffy/graphql-poc/?branch=master)
-[![SensioLabsInsight](https://insight.sensiolabs.com/projects/10471f85-68a0-4ca6-8f22-3f8ac34dfb89/mini.png)](https://insight.sensiolabs.com/projects/10471f85-68a0-4ca6-8f22-3f8ac34dfb89)
-
 This project is a proof of concept to test graphQL usage in PHP.  
 This work is based mainly on [Symfony framework](https://github.com/symfony/symfony/tree/4.1) and [overblog/GraphQLBundle](https://github.com/overblog/GraphQLBundle/tree/0.11).
 
 This project implements :
 
-* Type system
-    * :heavy_check_mark: Scalars
-    * :heavy_check_mark: Object
-    * :heavy_check_mark: Interface
-    * :heavy_check_mark: Union
-    * :heavy_check_mark: Enum
-    * :heavy_check_mark: Input Object
-    * :heavy_check_mark: Lists
-    * :heavy_check_mark: Non-Null
-* Concepts :
-    * :heavy_check_mark: Resolver
-    * :heavy_check_mark: Query
-    * :heavy_check_mark: GlobalId
-    * :heavy_multiplication_x: Type Inheritance
-    * :heavy_check_mark: Pagination
-    * :heavy_check_mark: Mutation
-    * :heavy_multiplication_x: Promise
-    * :heavy_check_mark: Validation
-    
 ## Requirement
 
 * git
 * composer
 * PHP 7.1.3 or higher
-* PDO-SQLite PHP extension enabled
 * [a Symfony 4.4 compatible environment](https://symfony.com/doc/4.4/setup.html#technical-requirements)
 
 ## Installation
 
-Retrieve repository : 
-
-```
-$ git clone git@github.com:Samffy/graphql-poc.git
-```
-
-Go to the project directory : 
-
-```
-$ cd graphql-poc
-```
 
 Install and launch project using : 
 
@@ -57,8 +21,10 @@ Install and launch project using :
 $ make deploy
 ```
 
-Go to : http://localhost:8000/graphiql  
-If you want to request the app using another GraphQL client, the endpoint is : http://localhost:8000/
+Endpoints: 
+
+http://localhost:8000/graphiql - graphiQL IDE 
+http://localhost:8000/ - postman/curl/what ever GraphQL client
 
 In `dev` mode, Symfony profiler is available at `/_profiler`.  
 
@@ -78,36 +44,22 @@ $ bin/console graphql:dump-schema --format=graphql --file=./config/graphql/schem
 ### Queries
 
 This project use 2 mains types : `Person` and `Vehicle`  
-A person has a `Pet` and one `Vehicle` or more.   
-A `Pet` can be a `Dog`, a `Cat` or a `Bear`.  
-A `Vehicle` can be a `Car` or a `Truck`.
 
 Here is an example of a graphQL query :
 
 ```graphql
 {
-    persons(id: "UGVyc29uOmR1ZmZ5") {
-        id
-        title
-        name
-        birth_date
-        created_at
-        pet {
-            ...on Animal {
-                id
-                name
-                breed
-            }
-        }
-        vehicles {
+    {
+        allPersons (last: 1){
             id
-            manufacturer
-            model
-            ...on Car {
-                seats_number
+            title
+            birthDate
+            vehicles {
+                id
+                manufacturer
             }
-            ...on Truck {
-                maximum_load
+            pet {
+                name
             }
         }
     }
@@ -121,10 +73,6 @@ You can find many examples in the [functional tests](tests/features/bootstrap/re
 This project use `Makefile` to simplify application usage.  
 [Take a look](Makefile), you will find some useful commands.
 
-### Database
-
-This application use SQLite. Database is versioned and available in the `/var/app.db` file.  
-Schema is available in the [original migration](src/Migrations/Version20180624103144.php). 
 
 ### Fixtures
 

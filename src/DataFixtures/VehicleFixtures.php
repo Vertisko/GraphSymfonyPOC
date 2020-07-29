@@ -2,22 +2,22 @@
 
 namespace App\DataFixtures;
 
-use App\Vehicle\Domain\Car;
-use App\Vehicle\Domain\Truck;
+use App\Entity\Vehicle;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 
 class VehicleFixtures extends Fixture
 {
+    private const CAR = 'car';
+    private const TRUCK = 'truck';
+
     public function load(ObjectManager $manager)
     {
         foreach (self::getVehicles() as $id => $data) {
             switch ($data['class']) {
-                case Car::class:
-                    $vehicle = new Car($id, $data['manufacturer'], $data['model'], $data['seats']);
-                    break;
-                case Truck::class:
-                    $vehicle = new Truck($id, $data['manufacturer'], $data['model'], $data['load']);
+                case self::CAR:
+                case self::TRUCK:
+                    $vehicle = new Vehicle($id, $data['manufacturer'], $data['model'], $data['class']);
                     break;
                 default:
                     continue;
@@ -33,37 +33,37 @@ class VehicleFixtures extends Fixture
     {
         return [
             'clio' => [
-                'class'        => Car::class,
+                'class'        => self::CAR,
                 'manufacturer' => 'Renault',
                 'model'        => 'Clio 2',
                 'seats'        => 5,
             ],
             'cox' => [
-                'class'        => Car::class,
+                'class'        => self::CAR,
                 'manufacturer' => 'Volkswagen',
                 'model'        => 'Coccinelle',
                 'seats'        => 4,
             ],
             'polo' => [
-                'class'        => Car::class,
+                'class'        => self::CAR,
                 'manufacturer' => 'Volkswagen',
                 'model'        => 'Polo',
                 'seats'        => 5,
             ],
             'ateam' => [
-                'class'        => Truck::class,
+                'class'        => self::TRUCK,
                 'manufacturer' => 'GMC',
                 'model'        => 'Vandura',
                 'load'         => 1000,
             ],
             'dumb' => [
-                'class'        => Truck::class,
+                'class'        => self::TRUCK,
                 'manufacturer' => 'Ford',
                 'model'        => 'Econoline',
                 'load'         => 600,
             ],
             'fear' => [
-                'class'        => Truck::class,
+                'class'        => self::TRUCK,
                 'manufacturer' => 'Corbitt',
                 'model'        => '50SD6',
                 'load'         => 5000,

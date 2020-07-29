@@ -2,9 +2,7 @@
 
 namespace App\DataFixtures;
 
-use App\Animal\Domain\Dog;
-use App\Animal\Domain\Cat;
-use App\Animal\Domain\Bear;
+use App\Entity\Animal;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 
@@ -13,7 +11,8 @@ class AnimalFixtures extends Fixture
     public function load(ObjectManager $manager)
     {
         foreach (self::getAnimals() as $id => $data) {
-            $animal = new $data['class']($id, $data['name']);
+
+            $animal = new Animal($id, $data['name']);
             $manager->persist($animal);
             $this->addReference($id, $animal);
         }
@@ -25,15 +24,15 @@ class AnimalFixtures extends Fixture
     {
         return [
             'rintintin' => [
-                'class' => Dog::class,
+                'class' => 'Animal',
                 'name' => 'Rintintin',
             ],
             'felix' => [
-                'class' => Cat::class,
+                'class' => 'AppAnimal',
                 'name' => 'Felix',
             ],
             'baloo' => [
-                'class' => Bear::class,
+                'class' => 'Animal',
                 'name' => 'Baloo',
             ],
         ];

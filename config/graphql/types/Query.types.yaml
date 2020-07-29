@@ -2,13 +2,13 @@ Query:
     type: object
     config:
         fields:
-            persons:
+            allPersons:
                 type: '[Person]'
                 args:
-                    id:
-                        description: 'Resolves person using its id.'
-                        type: 'ID'
-                resolve: "@=resolver('Persons', [idFromGlobalId(args['id'])])"
+                    last:
+                        description: 'Get X last elements of collection'
+                        type: 'Int'
+                resolve: "@=resolver('Persons', [args])"
             person:
                 type: 'Person'
                 args:
@@ -27,17 +27,3 @@ Query:
                         description: 'Resolves vehicle using its id.'
                         type: 'String'
                 resolve: "@=resolver('Vehicles', [args])"
-            car:
-                type: 'Car'
-                args:
-                    id:
-                        description: 'Resolves car using its id.'
-                        type: 'ID!'
-                resolve: "@=resolver('Vehicle', [idFromGlobalId(args['id'])])"
-            truck:
-                type: 'Truck'
-                args:
-                    id:
-                        description: 'Resolves truck using its id.'
-                        type: 'ID!'
-                resolve: "@=resolver('Vehicle', [idFromGlobalId(args['id'])])"

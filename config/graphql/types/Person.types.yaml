@@ -13,7 +13,7 @@ Person:
             title:
                 type: "PersonTitle!"
                 description: "Title of the person"
-            birth_date:
+            birthDate:
                 type: "BirthDate"
                 description: "Birth date of the person"
             created_at:
@@ -28,5 +28,5 @@ Person:
                         type: 'String'
                 resolve: "@=service('app.vehicles.resolver').resolveByPerson(value, idFromGlobalId(args['id']))"
             pet:
-                type: "Pet"
+                type: "Animal"
                 description: "Pet of the person"
