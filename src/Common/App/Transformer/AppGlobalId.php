@@ -4,7 +4,7 @@ namespace App\Common\App\Transformer;
 
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 
-class AppGlobalId extends GlobalId
+class  AppGlobalId extends GlobalId
 {
     public static function getIdFromGlobalId(?string $globalId): ?string
     {

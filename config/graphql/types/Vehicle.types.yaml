@@ -1,7 +1,7 @@
 Vehicle:
-    type: interface
+    type: object
     config:
-        description: "A vehicle interface"
+        description: "Vehicle"
         fields:
             id:
                 type: "ID!"
@@ -13,4 +13,6 @@ Vehicle:
             model:
                 type: "String!"
                 description: "The model of the vehicle"
-        resolveType: "@=resolver('vehicle_type', [value])"
+            class:
+                type: "String!"
+                description: "Type of vehicle"

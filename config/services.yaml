@@ -25,24 +25,24 @@ services:
             - { name: overblog_graphql.expression_function }
 
     app.person.resolver:
-        class: App\Person\App\Resolver\PersonResolver
+        class: App\Resolvers\Person\PersonResolver
         tags:
             - { name: overblog_graphql.resolver }
 
     app.persons.resolver:
-        class: App\Person\App\Resolver\PersonsResolver
+        class: App\Resolvers\Person\PersonsResolver
         tags:
             - { name: overblog_graphql.resolver }
 
     app.vehicle.resolver:
-        class: App\Vehicle\App\Resolver\VehicleResolver
+        class: App\Resolvers\Vehicle\VehicleResolver
         tags:
-            - { name: overblog_graphql.resolver, alias: "vehicle_type", method: "resolveType" }
+            - { name: overblog_graphql.resolver }
 
     app.vehicles.resolver:
-        class: App\Vehicle\App\Resolver\VehiclesResolver
+        class: App\Resolvers\Vehicle\VehiclesResolver
         tags:
-            - { name: overblog_graphql.resolver, alias: "app.vehicles.resolver" }
+            - { name: overblog_graphql.resolver}
 
     app.car.mutation.create:
         class: App\Vehicle\App\Mutation\CarMutation
@@ -70,12 +70,12 @@ services:
             - { name: overblog_graphql.mutation, alias: 'delete_vehicle', method: 'deleteVehicle' }
 
     app.animal.resolver:
-        class: App\Animal\App\Resolver\AnimalResolver
+        class: App\Resolvers\Animal\AnimalResolver
         tags:
             - { name: overblog_graphql.resolver, alias: "animal_type", method: "resolveType" }
 
     app.connection.resolver:
-        class: App\Common\App\Resolver\ConnectionResolver
+        class: App\Resolvers\ConnectionResolver
         tags:
         - { name: overblog_graphql.resolver, alias: "app.connection.resolver" }
 

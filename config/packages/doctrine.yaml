@@ -17,19 +17,10 @@ doctrine:
         naming_strategy: doctrine.orm.naming_strategy.underscore
         auto_mapping: true
         mappings:
-            Person:
-                type: xml
-                dir: '%kernel.root_dir%/../src/Person/Infra/Resources/DoctrineORM/config'
+            App:
                 is_bundle: false
-                prefix: App\Person\Domain
-            Animal:
-                type: xml
-                dir: '%kernel.root_dir%/../src/Animal/Infra/Resources/DoctrineORM/config'
-                is_bundle: false
-                prefix: App\Animal\Domain
-            Vehicle:
-                type: xml
-                dir: '%kernel.root_dir%/../src/Vehicle/Infra/Resources/DoctrineORM/config'
-                is_bundle: false
-                prefix: App\Vehicle\Domain
+                type: annotation
+                dir: '%kernel.project_dir%/src/Entity'
+                prefix: 'App\Entity'
+                alias: App
 

@@ -1,5 +1,5 @@
 Animal:
-    type: interface
+    type: object
     config:
         description: "A animal interface"
         fields:
@@ -13,4 +13,3 @@ Animal:
             breed:
                 type: "String!"
                 description: "Breed of the animal"
-        resolveType: "@=resolver('animal_type', [value])"

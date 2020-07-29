@@ -1,6 +1,0 @@
-Pet:
-    type: union
-    config:
-        types: [Dog, Cat, Bear]
-        description: Animals available as pet
-        resolveType: "@=resolver('animal_type', [value])"

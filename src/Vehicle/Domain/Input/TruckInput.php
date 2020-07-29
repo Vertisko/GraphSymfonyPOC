@@ -2,16 +2,16 @@
 
 namespace App\Vehicle\Domain\Input;
 
-use App\Vehicle\Domain\VehicleAbstract;
+use App\Entity\Vehicle;
 
-class TruckInput extends VehicleAbstract
+class TruckInput extends Vehicle
 {
     protected $id;
     protected $maximumLoad;
 
-    public function __construct(string $id, string $manufacturer, string $model, int $maximumLoad)
+    public function __construct(string $id, string $manufacturer, string $model, string $maximumLoad)
     {
-        parent::__construct($id, $manufacturer, $model);
+        parent::__construct($id, $manufacturer, $model, 'truck');
 
         $this->maximumLoad = $maximumLoad;
     }
