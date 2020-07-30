@@ -3,9 +3,10 @@
 namespace App\Mutation\Vehicle;
 
 use App\Common\Domain\ValidationException;
-use App\Repository\VehicleRepository;
-use App\Factory\VehicleFactory;
 use App\Entity\Vehicle;
+use App\Exceptions\NonExistingCarException;
+use App\Factory\VehicleFactory;
+use App\Repository\VehicleRepository;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\AliasedInterface;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
@@ -41,6 +42,7 @@ class CarMutation implements MutationInterface, AliasedInterface
 
     /**
      * @throws ValidationException
+     * @throws NonExistingCarException
      */
     public function updateCar(Argument $argument): Vehicle
     {
@@ -54,6 +56,10 @@ class CarMutation implements MutationInterface, AliasedInterface
 
         $car = $this->vehicleRepository->find($carInput->getId());
 
+        if(\is_null($car)){
+            throw new NonExistingCarException();
+        }
+
         $car
             ->setManufacturer($carInput->getManufacturer())
             ->setModel($carInput->getModel())
@@ -65,7 +71,8 @@ class CarMutation implements MutationInterface, AliasedInterface
     public static function getAliases(): array
     {
         return [
-            'resolve' => 'CarMutation',
+            'createCar' => 'create_car_mutation',
+            'updateCar' => 'update_car_mutation',
         ];
     }
 }

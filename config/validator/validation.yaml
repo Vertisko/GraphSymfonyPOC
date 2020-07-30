@@ -21,13 +21,6 @@ App\Vehicle\Domain\VehicleAbstract:
 
 App\Vehicle\Domain\Input\CarInput:
     properties:
-        id:
-          - App\Common\Infra\Validator\IdDoesNotExistConstraint:
-              fqcn: App\Vehicle\Domain\Car
-              groups: [create]
-          - App\Common\Infra\Validator\IdExistConstraint:
-              fqcn: App\Vehicle\Domain\Car
-              groups: [update]
         seatsNumber:
             - NotBlank:
                 groups: [create, update]

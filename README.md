@@ -66,6 +66,62 @@ Here is an example of a graphQL query :
 }
 ```
 
+
+### Mutations
+
+Some examples of mutations on Car/Vehicle Entity
+
+```graphql
+mutation CreateCarMutation($carInput: CarInput!){
+    createCarMutation(input: $carInput)
+    {
+        model
+        manufacturer
+        class
+    }
+}
+
+{   
+    "carInput": {
+        "id": "VmVoaWNsZTox", 
+        "manufacturer": "DMC", 
+        "model": "DeLorean DMC-12", 
+        "seats_number": 4
+    }
+}
+```
+
+```graphql
+mutation UpdateCarMutation($carInput: CarInput!) {
+    updateCarMutation(input: $carInput) {
+        manufacturer
+    }
+}
+
+{   
+    "carInput": {
+        "id": "VmVoaWNsZTox", 
+        "manufacturer": "CX",
+        "model": "XZ",
+        "seats_number": 4
+    }
+}
+```
+
+
+```graphql
+mutation DeleteVehicleMutation($idInput: IdInput!){
+        deleteVehicleMutation(input: $idInput)
+}
+
+{
+    "idInput": {
+        "id": "Q2FyOjE0"
+    }
+
+}
+```
+
 You can find many examples in the [functional tests](tests/features/bootstrap/resources/graphql_query).
 
 ## Developer tools

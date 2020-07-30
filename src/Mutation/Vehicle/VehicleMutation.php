@@ -3,6 +3,7 @@
 namespace App\Mutation\Vehicle;
 
 use App\Common\App\Transformer\AppGlobalId;
+use App\Exceptions\NonExistingCarException;
 use App\Repository\VehicleRepository;
 use GraphQL\Error\UserError;
 use Overblog\GraphQLBundle\Definition\Resolver\AliasedInterface;
@@ -22,11 +23,7 @@ class VehicleMutation implements MutationInterface, AliasedInterface
         $id = AppGlobalId::getIdFromGlobalId($globalId);
 
         if (!$vehicle = $this->vehicleRepository->find($id)) {
-            throw new UserError(sprintf(
-                '%s [%s] not found',
-                AppGlobalId::getTypeFromGlobalId($globalId),
-                $globalId
-            ));
+            throw new NonExistingCarException();
         }
 
         $this->vehicleRepository->delete($vehicle);
@@ -37,7 +34,7 @@ class VehicleMutation implements MutationInterface, AliasedInterface
     public static function getAliases(): array
     {
         return [
-            'resolve' => 'VehicleMutation',
+            'deleteVehicle' => 'delete_vehicle_mutation',
         ];
     }
 }

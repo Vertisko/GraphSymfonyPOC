@@ -2,15 +2,21 @@ Mutation:
     type: object
     config:
         fields:
-            DeleteCar:
+            deleteVehicleMutation:
                 type: ID!
-                resolve: "@=mutation('delete_vehicle', [args['input']['id']])"
+                resolve: "@=mutation('delete_vehicle_mutation', [args['input']['id']])"
                 args:
                     input:
                         type: IdInput!
-            DeleteTruck:
-                type: ID!
-                resolve: "@=mutation('delete_vehicle', [args['input']['id']])"
+            createCarMutation:
+                type: Vehicle!
+                resolve: "@=mutation('create_car_mutation', [args])"
                 args:
                     input:
-                        type: IdInput!
+                        type: CarInput!
+            updateCarMutation:
+                type: Vehicle!
+                resolve: "@=mutation('update_car_mutation', [args])"
+                args:
+                    input:
+                        type: CarInput!

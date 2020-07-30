@@ -12,6 +12,13 @@ type Animal {
 
 scalar BirthDate
 
+input CarInput {
+  id: ID!
+  manufacturer: String!
+  model: String!
+  seats_number: Int!
+}
+
 scalar DateTime
 
 input IdInput {
@@ -19,8 +26,9 @@ input IdInput {
 }
 
 type Mutation {
-  DeleteCar(input: IdInput!): ID!
-  DeleteTruck(input: IdInput!): ID!
+  deleteVehicleMutation(input: IdInput!): ID!
+  createCarMutation(input: CarInput!): Vehicle!
+  updateCarMutation(input: CarInput!): Vehicle!
 }
 
 """Information about pagination in a connection."""
@@ -53,13 +61,10 @@ type Person {
   birthDate: BirthDate
 
   """Date of creation of the person in database"""
-  created_at: DateTime!
+  createdAt: DateTime!
 
   """Vehicles of the person"""
-  vehicles(
-    """Resolves vehicle using its id."""
-    id: String
-  ): [Vehicle]
+  vehicles: [Vehicle]
 
   """Pet of the person"""
   pet: Animal
@@ -93,6 +98,10 @@ type Query {
     """Resolves vehicle using its id."""
     id: String
   ): VehicleConnection
+  vehicle(
+    """Resolves person using its id."""
+    id: ID!
+  ): Vehicle
 }
 
 """Vehicle"""

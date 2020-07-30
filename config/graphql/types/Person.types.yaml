@@ -16,17 +16,12 @@ Person:
             birthDate:
                 type: "BirthDate"
                 description: "Birth date of the person"
-            created_at:
+            createdAt:
                 type: "DateTime!"
                 description: "Date of creation of the person in database"
             vehicles:
                 type: "[Vehicle]"
                 description: "Vehicles of the person"
-                args:
-                    id:
-                        description: 'Resolves vehicle using its id.'
-                        type: 'String'
-                resolve: "@=service('app.vehicles.resolver').resolveByPerson(value, idFromGlobalId(args['id']))"
             pet:
                 type: "Animal"
                 description: "Pet of the person"

@@ -27,3 +27,10 @@ Query:
                         description: 'Resolves vehicle using its id.'
                         type: 'String'
                 resolve: "@=resolver('Vehicles', [args])"
+            vehicle:
+                type: 'Vehicle'
+                args:
+                    id:
+                        description: 'Resolves person using its id.'
+                        type: 'ID!'
+                resolve: "@=resolver('Vehicle', [idFromGlobalId(args['id'])])"

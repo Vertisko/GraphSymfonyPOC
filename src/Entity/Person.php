@@ -3,7 +3,6 @@
 namespace App\Entity;
 
 use App\Repository\PersonRepository;
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -62,7 +61,7 @@ class Person
         int $title = self::TITLE_UNKNOWN,
         \DateTime $birthDate = null,
         ?Animal $pet = null,
-        array $vehicles = []
+        array $vehicles = null
     ) {
         $this->id = $id;
         $this->name = $name;
@@ -70,7 +69,7 @@ class Person
         $this->birthDate = $birthDate;
         $this->createdAt = new \Datetime();
         $this->pet = $pet;
-        $this->vehicles = new ArrayCollection();
+        $this->vehicles = $vehicles;
     }
 
     public function getId(): ?int
